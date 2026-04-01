@@ -13,6 +13,11 @@ public class Admin
     @Column(length = 50, nullable = false)
     private String password;
 
+    public Admin()
+    {
+        
+    }
+
     public String getUsername() {
         return username;
     }

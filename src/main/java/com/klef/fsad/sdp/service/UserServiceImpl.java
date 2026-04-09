@@ -24,4 +24,14 @@ public class UserServiceImpl implements UserService
     {
         return userRepository.findByEmailAndPassword(email, password);
     }
+
+	@Override
+	public User getUserById(int userId) {
+		    return userRepository.findById(userId).orElse(null);
+	}
+	
+	@Override
+	public void deleteUser(int userId) {
+	    userRepository.deleteById(userId);
+	}
 }

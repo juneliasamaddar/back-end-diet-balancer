@@ -8,5 +8,9 @@ public interface UserService
 
     public User checkUserLogin(String email, String password);
 
+	public User getUserById(int userId);
+
+	public void deleteUser(int userId);
+
 	
 }

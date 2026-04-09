@@ -13,25 +13,27 @@ public class UserServiceImpl implements UserService
     private UserRepository userRepository;
 
     @Override
-    public String addUser(User u) 
+    public String addUser(User user)
     {
-        userRepository.save(u);
+        userRepository.save(user);
         return "User Registered Successfully";
     }
 
     @Override
-    public User checkUserLogin(String email, String password) 
+    public User checkUserLogin(String email, String password)
     {
         return userRepository.findByEmailAndPassword(email, password);
     }
 
-	@Override
-	public User getUserById(int userId) {
-		    return userRepository.findById(userId).orElse(null);
-	}
-	
-	@Override
-	public void deleteUser(int userId) {
-	    userRepository.deleteById(userId);
-	}
+    @Override
+    public User getUserById(int userId)
+    {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    public void deleteUser(int userId)
+    {
+        userRepository.deleteById(userId);
+    }
 }

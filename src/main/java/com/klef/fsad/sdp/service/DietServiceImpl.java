@@ -1,41 +1,48 @@
 package com.klef.fsad.sdp.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.klef.fsad.sdp.entity.Diet;
 import com.klef.fsad.sdp.repository.DietRepository;
 
 @Service
-public class DietServiceImpl implements DietService {
-
+public class DietServiceImpl implements DietService
+{
     @Autowired
     private DietRepository dietRepository;
 
     @Override
-    public String addDiet(Diet diet) {
+    public String addDiet(Diet diet)
+    {
         dietRepository.save(diet);
-        return "Diet added successfully";
+        return "Diet Added Successfully";
     }
 
     @Override
-    public List<Diet> getUserDiets(int userId) {
+    public List<Diet> getUserDiets(int userId)
+    {
         return dietRepository.findByUserId(userId);
     }
 
     @Override
-    public Diet updateDiet(Diet diet) {
-        return dietRepository.save(diet); // updates if ID exists
+    public Diet updateDiet(Diet diet)
+    {
+        return dietRepository.save(diet);
     }
 
     @Override
-    public String deleteDiet(int id) {
+    public String deleteDiet(int id)
+    {
         dietRepository.deleteById(id);
-        return "Diet deleted successfully";
+        return "Diet Deleted Successfully";
     }
 
     @Override
-    public List<Diet> getAllDiets() {
+    public List<Diet> getAllDiets()
+    {
         return dietRepository.findAll();
     }
 }

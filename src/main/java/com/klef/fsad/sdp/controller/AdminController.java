@@ -15,7 +15,7 @@ public class AdminController
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("/register")
+    @PostMapping("/registerAdmin")
     public ResponseEntity<String> registerAdmin(@RequestBody Admin admin)
     {
         try
@@ -29,7 +29,7 @@ public class AdminController
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/loginAdmin")
     public ResponseEntity<?> checkAdminLogin(@RequestBody Admin admin) 
     {
         Admin a = adminService.verifyAdminLogin(admin.getUsername(), admin.getPassword());

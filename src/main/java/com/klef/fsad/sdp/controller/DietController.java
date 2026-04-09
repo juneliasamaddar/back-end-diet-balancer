@@ -3,47 +3,66 @@ package com.klef.fsad.sdp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.klef.fsad.sdp.entity.Diet;
 import com.klef.fsad.sdp.service.DietService;
 
 @RestController
-@RequestMapping("/userapi/diets")
-@CrossOrigin(origins = "http://localhost:3000") // if frontend runs on localhost:3000
-public class DietController {
-
+@RequestMapping("userapi")
+@CrossOrigin("*")
+public class DietController
+{
     @Autowired
     private DietService dietService;
 
-    // Get all diets
-    @GetMapping
-    public List<Diet> getAllDiets() {
-        return dietService.getAllDiets();
+    @PostMapping("/addDiet")
+    public ResponseEntity<String> addDiet(@RequestBody Diet diet)
+    {
+        try
+        {
+            String response = dietService.addDiet(diet);
+            return ResponseEntity.status(201).body(response);
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.status(500).body("Failed to Add Diet");
+        }
     }
 
-    // Get diets for a specific user
-    @GetMapping("/user/{userId}")
-    public List<Diet> getUserDiets(@PathVariable int userId) {
-        return dietService.getUserDiets(userId);
+    @GetMapping("getUserDiets/{userId}")
+    public ResponseEntity<List<Diet>> getUserDiets(@PathVariable int userId)
+    {
+        return ResponseEntity.ok(dietService.getUserDiets(userId));
     }
 
-    // Add a new diet
-    @PostMapping
-    public String addDiet(@RequestBody Diet diet) {
-        return dietService.addDiet(diet);
+    @PutMapping("updateDiet/{id}")
+    public ResponseEntity<?> updateDiet(@PathVariable int id, @RequestBody Diet diet)
+    {
+        try
+        {
+            diet.setId(id);
+            Diet updatedDiet = dietService.updateDiet(diet);
+            return ResponseEntity.ok(updatedDiet);
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.status(500).body("Failed to Update Diet");
+        }
     }
 
-    // Update a diet
-    @PutMapping("/{id}")
-    public Diet updateDiet(@PathVariable int id, @RequestBody Diet diet) {
-        diet.setId(id); // Make sure Diet entity has setId()
-        return dietService.updateDiet(diet);
-    }
-
-    // Delete a diet
-    @DeleteMapping("/{id}")
-    public String deleteDiet(@PathVariable int id) {
-        return dietService.deleteDiet(id);
+    @DeleteMapping("deleteDiet/{id}")
+    public ResponseEntity<String> deleteDiet(@PathVariable int id)
+    {
+        try
+        {
+            String response = dietService.deleteDiet(id);
+            return ResponseEntity.ok(response);
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.status(500).body("Failed to Delete Diet");
+        }
     }
 }

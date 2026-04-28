@@ -8,7 +8,7 @@ import com.klef.fsad.sdp.entity.User;
 
 public interface AdminService 
 {
-    public Admin verifyAdminLogin(String username,String password);
+    public Admin verifyAdminLogin(String username, String password);
 
     public List<User> viewAllUsers();
 

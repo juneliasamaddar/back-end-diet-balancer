@@ -16,43 +16,43 @@ import com.klef.fsad.sdp.repository.UserRepository;
 public class AdminServiceImpl implements AdminService
 {
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminRepository adminRepo;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepo;
 
     @Autowired
-    private DietRepository dietRepository;
+    private DietRepository dietRepo;
 
     @Override
-    public Admin verifyAdminLogin(String username, String password) 
+    public Admin verifyAdminLogin(String username, String password)
     {
-        return adminRepository.findByUsernameAndPassword(username, password);
+        return adminRepo.findByUsernameAndPassword(username.trim(), password.trim());
     }
 
     @Override
-    public List<User> viewAllUsers() 
+    public List<User> viewAllUsers()
     {
-        return userRepository.findAll();
+        return userRepo.findAll();
     }
 
     @Override
-    public List<Diet> viewAllDiets() 
+    public List<Diet> viewAllDiets()
     {
-        return dietRepository.findAll();
+        return dietRepo.findAll();
     }
 
     @Override
-    public String deleteUser(int id) 
+    public String deleteUser(int id)
     {
-        userRepository.deleteById(id);
+        userRepo.deleteById(id);
         return "User Deleted Successfully";
     }
 
     @Override
-    public String deleteDiet(int id) 
+    public String deleteDiet(int id)
     {
-        dietRepository.deleteById(id);
+        dietRepo.deleteById(id);
         return "Diet Deleted Successfully";
     }
 }

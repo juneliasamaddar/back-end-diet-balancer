@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.klef.fsad.sdp.entity.Admin;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin,String>
+public interface AdminRepository extends JpaRepository<Admin, String>
 {
-    public Admin findByUsernameAndPassword(String username,String password);
+    public Admin findByUsernameAndPassword(String username, String password);
 }

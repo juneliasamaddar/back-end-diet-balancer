@@ -10,7 +10,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/fileapi")
 @CrossOrigin("*")
-public class FileController 
+public class FoodController 
 {
     private final String UPLOAD_DIR = "uploads/";
 
